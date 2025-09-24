@@ -25,10 +25,10 @@
                 <div class="question" data-step="1">
                     <h2>Que tipo de projeto você precisa?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="site">Site</button>
-                        <button class="option-btn" data-value="app">Aplicativo</button>
-                        <button class="option-btn" data-value="chatbot">Chatbot com IA</button>
-                        <button class="option-btn" data-value="both">Ambos</button>
+                        <button class="option-btn" data-value="Site">Site</button>
+                        <button class="option-btn" data-value="Aplicativo">Aplicativo</button>
+                        <button class="option-btn" data-value="Chatbot com IA">Chatbot com IA</button>
+                        <button class="option-btn" data-value="Múltiplos projetos">Ambos</button>
                     </div>
                 </div>
 
@@ -39,12 +39,12 @@
                     </button>
                     <h2>Qual tipo de site você precisa?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="institucional">Site Institucional</button>
-                        <button class="option-btn" data-value="ecommerce-site">E-commerce</button>
-                        <button class="option-btn" data-value="portfolio">Portfólio</button>
-                        <button class="option-btn" data-value="blog">Blog/Notícias</button>
-                        <button class="option-btn" data-value="landing">Landing Page</button>
-                        <button class="option-btn" data-value="custom-site">Personalizado</button>
+                        <button class="option-btn" data-value="Site Institucional">Site Institucional</button>
+                        <button class="option-btn" data-value="E-commerce">E-commerce</button>
+                        <button class="option-btn" data-value="Portfólio">Portfólio</button>
+                        <button class="option-btn" data-value="Blog/Notícias">Blog/Notícias</button>
+                        <button class="option-btn" data-value="Landing Page">Landing Page</button>
+                        <button class="option-btn" data-value="Site Personalizado">Personalizado</button>
                     </div>
                 </div>
 
@@ -55,10 +55,10 @@
                     </button>
                     <h2>Qual tipo de aplicativo você precisa?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="ecommerce">E-commerce</button>
-                        <button class="option-btn" data-value="delivery">Delivery</button>
-                        <button class="option-btn" data-value="crm">Sistema CRM</button>
-                        <button class="option-btn" data-value="custom">Personalizado</button>
+                        <button class="option-btn" data-value="Aplicativo E-commerce">E-commerce</button>
+                        <button class="option-btn" data-value="Aplicativo de Delivery">Delivery</button>
+                        <button class="option-btn" data-value="Sistema CRM">Sistema CRM</button>
+                        <button class="option-btn" data-value="Aplicativo Personalizado">Personalizado</button>
                     </div>
                 </div>
 
@@ -69,11 +69,11 @@
                     </button>
                     <h2>Qual tipo de chatbot você precisa?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="atendimento">Atendimento ao Cliente</button>
-                        <button class="option-btn" data-value="vendas">Vendas e Conversão</button>
-                        <button class="option-btn" data-value="suporte">Suporte Técnico</button>
-                        <button class="option-btn" data-value="agendamento">Agendamento</button>
-                        <button class="option-btn" data-value="custom-bot">Personalizado</button>
+                        <button class="option-btn" data-value="Chatbot de Atendimento ao Cliente">Atendimento ao Cliente</button>
+                        <button class="option-btn" data-value="Chatbot de Vendas e Conversão">Vendas e Conversão</button>
+                        <button class="option-btn" data-value="Chatbot de Suporte Técnico">Suporte Técnico</button>
+                        <button class="option-btn" data-value="Chatbot de Agendamento">Agendamento</button>
+                        <button class="option-btn" data-value="Chatbot Personalizado">Personalizado</button>
                     </div>
                 </div>
 
@@ -84,10 +84,10 @@
                     </button>
                     <h2>Qual combinação você precisa?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="site-app">Site + Aplicativo</button>
-                        <button class="option-btn" data-value="site-chatbot">Site + Chatbot</button>
-                        <button class="option-btn" data-value="app-chatbot">Aplicativo + Chatbot</button>
-                        <button class="option-btn" data-value="site-app-chatbot">Site + App + Chatbot</button>
+                        <button class="option-btn" data-value="Site + Aplicativo">Site + Aplicativo</button>
+                        <button class="option-btn" data-value="Site + Chatbot">Site + Chatbot</button>
+                        <button class="option-btn" data-value="Aplicativo + Chatbot">Aplicativo + Chatbot</button>
+                        <button class="option-btn" data-value="Site + Aplicativo + Chatbot">Site + App + Chatbot</button>
                     </div>
                 </div>
 
@@ -98,10 +98,10 @@
                     </button>
                     <h2>Quando você pretende iniciar o projeto?</h2>
                     <div class="options">
-                        <button class="option-btn" data-value="immediate">Imediatamente</button>
-                        <button class="option-btn" data-value="15days">Em 15 dias</button>
-                        <button class="option-btn" data-value="30days">Em 30 dias</button>
-                        <button class="option-btn" data-value="60days">Em 60 dias ou mais</button>
+                        <button class="option-btn" data-value="Imediatamente">Imediatamente</button>
+                        <button class="option-btn" data-value="Em 15 dias">Em 15 dias</button>
+                        <button class="option-btn" data-value="Em 30 dias">Em 30 dias</button>
+                        <button class="option-btn" data-value="Em 60 dias ou mais">Em 60 dias ou mais</button>
                     </div>
                 </div>
 
@@ -230,13 +230,13 @@
             if (step === 2) {
                 // No step 2, mostra a pergunta correta baseada na escolha do step 1
                 const projectType = formData.step1;
-                if (projectType === 'site') {
+                if (projectType === 'Site') {
                     document.getElementById('site-question').classList.remove('hidden');
-                } else if (projectType === 'app') {
+                } else if (projectType === 'Aplicativo') {
                     document.getElementById('app-question').classList.remove('hidden');
-                } else if (projectType === 'chatbot') {
+                } else if (projectType === 'Chatbot com IA') {
                     document.getElementById('chatbot-question').classList.remove('hidden');
-                } else if (projectType === 'both') {
+                } else if (projectType === 'Múltiplos projetos') {
                     document.getElementById('both-question').classList.remove('hidden');
                 }
             } else {
