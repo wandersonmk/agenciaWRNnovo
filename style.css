@@ -1750,6 +1750,7 @@ video {
     position: relative;
     z-index: 2;
     border: 2px solid transparent;
+    cursor: pointer;
 }
 
 .plano-btn:hover {
@@ -1870,6 +1871,7 @@ video {
 .plano-btn-personalizado {
     background: linear-gradient(135deg, #FA3D02, #ff4f1a);
     color: white;
+    cursor: pointer;
 }
 
 .plano-btn-personalizado:hover {
@@ -2142,19 +2144,19 @@ video {
 }
 
 .success-content .success-circle {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, #4CAF50, #45A049);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px;
+    margin: 0 auto 20px;
     animation: successPulse 2s ease-in-out infinite alternate;
 }
 
 .success-content .success-circle i {
-    font-size: 35px;
+    font-size: 26px;
     color: white;
 }
 
