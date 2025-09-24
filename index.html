@@ -8,6 +8,7 @@
     <link rel="icon" href="img/ico.png" type="image/png">
     <link rel="shortcut icon" href="img/ico.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Agência WRN - Chatbots e Aplicativos</title>
 </head>
 <body>
@@ -134,7 +135,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de contratar o Plano Essencial para desenvolvimento de site." target="_blank" class="plano-btn">Contratar Plano</a>
+                    <button class="plano-btn" onclick="openPlanModal('Plano Essencial', 'R$ 49,90')">Contratar Plano</button>
                 </div>
 
                 <!-- Plano Intermediário -->
@@ -184,7 +185,7 @@
                             <span class="feature-icon">📈</span>
                             <span>Analytics detalhado</span>
                         </div>
-                    </div>                    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de contratar o Plano Profissional para desenvolvimento de site." target="_blank" class="plano-btn">Contratar Plano</a>
+                    </div>                    <button class="plano-btn" onclick="openPlanModal('Plano Profissional', 'R$ 59,90')">Contratar Plano</button>
                 </div>
 
                 <!-- Plano Premium -->
@@ -233,7 +234,7 @@
                             <span class="feature-icon">📊🎯</span>
                             <span>Dashboards completos</span>
                         </div>
-                    </div>                    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de contratar o Plano Premium para desenvolvimento de site." target="_blank" class="plano-btn">Contratar Plano</a>
+                    </div>                    <button class="plano-btn" onclick="openPlanModal('Plano Premium', 'R$ 79,90')">Contratar Plano</button>
                 </div>
 
                 <!-- Plano Personalizado -->
@@ -254,7 +255,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de personalizar um plano sob medida para desenvolvimento de site. Preciso de uma solução específica para meu negócio." target="_blank" class="plano-btn plano-btn-personalizado">Personalizar Pacote</a>
+                    <button class="plano-btn plano-btn-personalizado" onclick="openPlanModal('Plano Personalizado', 'Sob Consulta')">Personalizar Pacote</button>
                 </div>
             </div>
         </div>
@@ -264,6 +265,60 @@
         class="link-whatsapp">
         <img src="./img/whatsapp.png" alt="Fale conosco no WhatsApp">
     </a>
+
+    <!-- Modal de Contratação de Plano -->
+    <div id="planModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalPlanTitle">Contratar Plano</h2>
+                <button class="modal-close" onclick="closePlanModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="plan-info">
+                    <div class="plan-selected">
+                        <span class="plan-label">Plano Selecionado:</span>
+                        <span id="selectedPlan" class="plan-name"></span>
+                        <span id="selectedPrice" class="plan-price"></span>
+                    </div>
+                </div>
+                <form id="planForm" class="plan-form">
+                    <div class="form-group">
+                        <label for="customerName">Nome Completo *</label>
+                        <input type="text" id="customerName" name="name" required placeholder="Digite seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Telefone/WhatsApp *</label>
+                        <input type="tel" id="customerPhone" name="phone" required placeholder="(11) 99999-9999">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closePlanModal()">Cancelar</button>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">Contratar Plano</span>
+                            <span class="btn-loading" style="display: none;">Enviando...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content success-content">
+            <div class="success-animation">
+                <div class="success-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            <h2>🎉 Solicitação Enviada!</h2>
+            <div class="success-message">
+                <p><strong>Parabéns!</strong> Sua solicitação de contratação foi enviada com sucesso.</p>
+                <p>📞 <strong>Nossa equipe entrará em contato em breve</strong></p>
+                <p>⏰ Tempo estimado de resposta: <strong>até 2 horas</strong></p>
+            </div>
+            <button class="btn-close-success" onclick="closeSuccessModal()">Fechar</button>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
     <script>
@@ -284,6 +339,108 @@
                     nav.classList.remove('active');
                 });
             });
+        });
+
+        // Funções do Modal de Planos
+        let selectedPlanData = {};
+
+        function openPlanModal(planName, planPrice) {
+            selectedPlanData = {
+                name: planName,
+                price: planPrice
+            };
+            
+            document.getElementById('selectedPlan').textContent = planName;
+            document.getElementById('selectedPrice').textContent = planPrice;
+            document.getElementById('modalPlanTitle').textContent = `Contratar ${planName}`;
+            document.getElementById('planModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePlanModal() {
+            document.getElementById('planModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('planForm').reset();
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Formatação de telefone
+        document.getElementById('customerPhone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 2) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            }
+            if (value.length > 10) {
+                value = `${value.slice(0, 10)}-${value.slice(10)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Envio do formulário
+        document.getElementById('planForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('.btn-submit');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            // Mostra loading
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(e.target);
+            const data = {
+                nome: formData.get('name'),
+                telefone: formData.get('phone'),
+                plano: selectedPlanData.name,
+                valor: selectedPlanData.price,
+                dataEnvio: new Date().toISOString()
+            };
+            
+            try {
+                const response = await fetch('https://n8n-n8n-start.lfuji0.easypanel.host/webhook/plano', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    closePlanModal();
+                    document.getElementById('successModal').style.display = 'flex';
+                } else {
+                    throw new Error('Erro ao enviar solicitação');
+                }
+            } catch (error) {
+                alert('Ops! Houve um erro ao enviar sua solicitação. Tente novamente.');
+                console.error('Erro:', error);
+            } finally {
+                // Restaura botão
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('planModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePlanModal();
+            }
+        });
+
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
         });
     </script>
 </body>
