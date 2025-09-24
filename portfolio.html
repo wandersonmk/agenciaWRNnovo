@@ -26,8 +26,8 @@
             <div></div>
         </div>
         <nav>
-            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os serviços de Chatbot com IA da Agência WRN." target="_blank">Chatbot com IA</a>
-            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre o desenvolvimento de aplicativos da Agência WRN." target="_blank">Aplicativos</a>
+            <a href="briefing.html">Chatbot com IA</a>
+            <a href="briefing.html">Aplicativos</a>
             <a href="portfolio.html">Portfólio</a>
             <a href="https://rwmasterclass.com.br/" target="_blank">Curso</a>
             <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de conversar com a equipe da Agência WRN." target="_blank">Contato</a>
@@ -85,6 +85,64 @@
             </div>
         </div>
 
+        <!-- Seção do Site Embedado -->
+        <div class="embedded-site-section">
+            <h2>RW Master Class</h2>
+            <p class="embedded-intro">Conheça nossa plataforma de cursos e treinamentos especializados</p>
+            <div class="iframe-container">
+                <iframe 
+                    src="https://rwmasterclass.com.br/" 
+                    width="100%" 
+                    height="600"
+                    frameborder="0" 
+                    loading="lazy"
+                    title="RW Master Class - Plataforma de Cursos">
+                </iframe>
+            </div>
+            <a href="https://rwmasterclass.com.br/" target="_blank" class="embedded-link">Visitar Site Completo</a>
+        </div>
+
+        <!-- Seção do MultFit Brasil -->
+        <div class="embedded-site-section">
+            <h2>MultFit Brasil</h2>
+            <p class="embedded-intro">Plataforma completa para fitness e bem-estar desenvolvida pela nossa equipe</p>
+            
+            <!-- Tentativa 1: Iframe direto -->
+            <div class="iframe-container" id="multfitIframe" style="display: block;">
+                <iframe 
+                    src="https://multfitbrasil.com.br/" 
+                    width="100%" 
+                    height="600"
+                    frameborder="0" 
+                    loading="lazy"
+                    title="MultFit Brasil - Plataforma de Fitness"
+                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+                </iframe>
+            </div>
+
+            <!-- Fallback: Prévia Visual (será mostrado se iframe falhar) -->
+            <div class="site-preview-container" id="multfitPreview" style="display: none;">
+                <div class="site-preview-overlay">
+                    <div class="preview-content">
+                        <h3>🏋️ MultFit Brasil</h3>
+                        <p>⚠️ Este site não permite navegação embedada</p>
+                        <p>Plataforma completa de fitness com:</p>
+                        <ul>
+                            <li>✅ Sistema de treinos personalizados</li>
+                            <li>✅ Acompanhamento nutricional</li>
+                            <li>✅ Dashboard de progresso</li>
+                            <li>✅ Comunidade fitness integrada</li>
+                        </ul>
+                        <div class="preview-cta">
+                            <span>Clique para abrir em nova aba</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="https://multfitbrasil.com.br/" target="_blank" class="embedded-link">Visitar Site Completo</a>
+        </div>
+
         <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os projetos da Agência WRN." target="_blank" class="cta-button">QUERO UM PROJETO ASSIM</a>
     </main>
 
@@ -118,6 +176,52 @@
             const video = document.querySelector('.video-container video');
             if (video) {
                 video.playbackRate = 5.0; // Velocidade 5x
+            }
+
+            // Detectar se iframe do MultFit carregou
+            const multfitIframe = document.getElementById('multfitIframe');
+            const multfitPreview = document.getElementById('multfitPreview');
+            
+            if (multfitIframe && multfitPreview) {
+                const iframe = multfitIframe.querySelector('iframe');
+                
+                // Timeout para detectar falha de carregamento
+                let iframeTimeout = setTimeout(function() {
+                    console.log('Iframe MultFit falhou ao carregar - usando preview');
+                    multfitIframe.style.display = 'none';
+                    multfitPreview.style.display = 'block';
+                }, 5000); // 5 segundos
+
+                // Se iframe carregar com sucesso
+                iframe.onload = function() {
+                    try {
+                        // Tentar acessar o documento do iframe
+                        iframe.contentDocument || iframe.contentWindow.document;
+                        console.log('Iframe MultFit carregou com sucesso');
+                        clearTimeout(iframeTimeout);
+                    } catch (e) {
+                        console.log('Iframe MultFit bloqueado por política de segurança');
+                        multfitIframe.style.display = 'none';
+                        multfitPreview.style.display = 'block';
+                        clearTimeout(iframeTimeout);
+                    }
+                };
+
+                // Se iframe falhar completamente
+                iframe.onerror = function() {
+                    console.log('Erro ao carregar iframe MultFit');
+                    multfitIframe.style.display = 'none';
+                    multfitPreview.style.display = 'block';
+                    clearTimeout(iframeTimeout);
+                };
+            }
+
+            // Tornar a prévia do site clicável
+            const sitePreview = document.querySelector('.site-preview-container');
+            if (sitePreview) {
+                sitePreview.addEventListener('click', function() {
+                    window.open('https://multfitbrasil.com.br/', '_blank');
+                });
             }
         });
     </script>
